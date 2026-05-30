@@ -175,8 +175,10 @@
         <button class="btn btn-share" onclick="return false;">Uložit online a sdílet</button>
     </div>
 
-    <div class="steps-container" id="steps-container">
-        </div>
+	<div class="steps-container">
+        	<div style="font-size: 16px; font-weight: bold; color: #111827; margin-bottom: 15px; text-transform: uppercase;">Stav platby</div>
+        	<div id="steps-container-inner"></div>
+    	</div>
 </div>
 
 <script type="module">
@@ -204,8 +206,11 @@
         "step2": "Zásilka v pořádku zkontrolována, rozbalena a zboží je OK (žádná reklamace)",
         "step3": "Systém vytvořil automatický koncept platebního příkazu",
         "step4": "Platební příkaz schválen",
-        "step5": "Platební příkaz s dobírkovou částkou byl odeslán (připsání na účet může trvat až 3 dny)",
-        "step6": "Transakce dokončena"
+	"step5": "Přepravce odeslal platební příkaz s dobírkovou částkou odesílateli",
+	"step6": "Dobírková částka byla připsána na účet odesílatele",
+        "step7": "Platební příkaz s dobírkovou částkou byl odeslán",
+	"step8": "Transakce dokončena",
+        "step9": "Transakce dokončena"
     };
 
     onValue(dbRef, (snapshot) => {
@@ -232,10 +237,10 @@
             });
 
             // Aktualizace kroků
-            const stepsContainer = document.getElementById('steps-container');
+            const stepsContainer = document.getElementById('steps-container-inner');
             stepsContainer.innerHTML = ''; // Vyčištění před novým renderem
             
-            for (let i = 1; i <= 6; i++) {
+            for (let i = 1; i <= 9; i++) {
                 const stepKey = `step${i}`;
                 if (data.steps && data.steps[stepKey]) {
                     const stepDiv = document.createElement('div');
